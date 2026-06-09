@@ -65,6 +65,24 @@ The raw data consists of 9 tables (~1.1M records) loaded into BigQuery under the
 ### Prerequisites
 - [Anaconda](https://www.anaconda.com/download) or Miniconda installed
 - The service account JSON key file — ask the project owner (Marcus) to share it with you securely
+- A Google account added to the GCP project by Marcus — required to view data and run queries in the BigQuery console (see below)
+
+---
+
+### For the project owner only — adding group members to GCP
+
+> Skip this section if you are a group member. Send your Google account email to Marcus.
+
+1. Go to [GCP Console](https://console.cloud.google.com) and select the `olist-498903` project
+2. Navigate to **IAM & Admin → IAM**
+3. Click **Grant Access**
+4. Enter the group member's Google account email
+5. Assign the role: **BigQuery User**
+6. Click **Save**
+
+Once added, the group member can log into [console.cloud.google.com](https://console.cloud.google.com), navigate to BigQuery, and browse and query all datasets.
+
+---
 
 ### Step 1 — Clone the repo
 ```bash
@@ -80,6 +98,8 @@ conda activate m2
 
 ### Step 3 — Save BigQuery credentials
 Save the service account JSON key file somewhere safe on your machine **outside the repo** (e.g. `~/.gcp/olist-key.json`). Note the full path.
+
+> The key gives dbt programmatic access to create and update tables in BigQuery. To view and query data in the BigQuery console, your Google account must be added to the GCP project by Marcus (see above).
 
 ### Step 4 — Configure dbt
 Open `olist_transform/profiles.yml` and update the `keyfile` path to where you saved your JSON key:
