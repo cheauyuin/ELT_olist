@@ -40,13 +40,13 @@ rfm_scored AS (
         monetary,
 
         -- Recency: fewer days since last order = higher score
-        NTILE(5) OVER (ORDER BY recency_days DESC) AS recency_score,
+        NTILE(5) OVER (ORDER BY recency_days DESC, customer_unique_id) AS recency_score,
 
         -- Frequency: more orders = higher score
-        NTILE(5) OVER (ORDER BY frequency ASC)     AS frequency_score,
+        NTILE(5) OVER (ORDER BY frequency ASC,     customer_unique_id) AS frequency_score,
 
         -- Monetary: higher spend = higher score
-        NTILE(5) OVER (ORDER BY monetary ASC)      AS monetary_score
+        NTILE(5) OVER (ORDER BY monetary ASC,      customer_unique_id) AS monetary_score
     FROM rfm_raw
 ),
 
