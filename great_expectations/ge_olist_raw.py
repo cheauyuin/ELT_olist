@@ -12,6 +12,7 @@ Run:
     python ge_olist_raw_v2.py
 """
 
+import sys
 import great_expectations as gx
 import pandas as pd
 from sqlalchemy import create_engine
@@ -423,3 +424,6 @@ print("  See schema.yml for cleaning rules and flags.")
 print("\n" + "═" * 70)
 print(f"  GE SUITE RESULT: {'ALL PASSED ✓' if total_failed == 0 else 'SOME FAILED ✗'}")
 print("═" * 70 + "\n")
+
+if total_failed > 0:
+    sys.exit(1)  # Non-zero exit code signals failure to Dagster — pipeline halts here
